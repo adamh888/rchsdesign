@@ -1,0 +1,12 @@
+{
+  "name": "rchs-design",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static copy of rchsdesign.com served on Railway",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
