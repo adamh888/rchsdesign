@@ -1,0 +1,30 @@
+/* Overrides layered on top of the original Pagelayer/PopularFX styles. Selectors start with
+   .pagelayer-body so they outrank Pagelayer's per-element inline styles (.p-xxxx). */
+
+/* Services page: "What We Do" used to be followed by "Meet Our Team"; keep a gap above the footer. */
+.pagelayer-body .p-uew7815 { padding-bottom: 100px; }
+
+/* Phones and tablets (780px is Pagelayer's breakpoint, where the menu collapses). */
+@media (max-width: 780px) {
+	/* Header logo: the About/Contact/Services header let it fill 70% of the screen. Match the home page. */
+	.pagelayer-body .pagelayer-header .pagelayer-img { max-width: 110px; }
+	.pagelayer-body .pagelayer-header .pagelayer-image-holder { text-align: left; }
+
+	/* Menu button: Pagelayer's padding value is broken ("15 {{val[1]}"), leaving a 28px tap target. */
+	.pagelayer-body .pagelayer-header .pagelayer-primary-menu-bar i {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
+		padding: 0;
+	}
+
+	/* "Our Services": drop the white 100px band above it and the desktop-sized padding. */
+	.pagelayer-body .p-ley8739 { margin-top: 0; padding-top: 56px; padding-bottom: 56px; }
+	.pagelayer-body .p-uew7815 { padding-bottom: 48px; }
+
+	/* About: smaller gap above "Meet Our Team"; hide the empty spacer row before the footer. */
+	.pagelayer-body .p-k7a4453 { margin-top: 48px; }
+	.pagelayer-body .p-fno5153 { display: none; }
+}

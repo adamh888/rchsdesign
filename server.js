@@ -5,6 +5,9 @@ const path = require("path");
 const ROOT = path.join(__dirname, "public");
 const PORT = process.env.PORT || 3000;
 
+// Old WordPress URLs that moved.
+const REDIRECTS = { "/service": "/about/", "/service/": "/about/" };
+
 const TYPES = {
   ".html": "text/html; charset=utf-8",
   ".css": "text/css; charset=utf-8",
@@ -36,6 +39,11 @@ http
       urlPath = decodeURIComponent(new URL(req.url, "http://localhost").pathname);
     } catch {
       return send(res, 400, "Bad Request");
+    }
+
+    if (REDIRECTS[urlPath]) {
+      res.writeHead(301, { Location: REDIRECTS[urlPath] });
+      return res.end();
     }
 
     let file = path.join(ROOT, urlPath);
