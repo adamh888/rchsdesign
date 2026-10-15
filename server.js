@@ -45,7 +45,10 @@ http
       if (!err && stat.isDirectory()) {
         // Match WordPress URLs: /service -> /service/
         if (!urlPath.endsWith("/")) {
-          res.writeHead(301, { Location: urlPath + "/" });
+          // Build the target from the resolved path, not the raw URL, so "/%2Fevil.com%2F..%2Fservice"
+          // can't produce an off-site "//evil.com/..." redirect.
+          const rel = path.relative(ROOT, file).split(path.sep).join("/");
+          res.writeHead(301, { Location: encodeURI(rel ? `/${rel}/` : "/") });
           return res.end();
         }
         file = path.join(file, "index.html");
