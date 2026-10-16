@@ -4,6 +4,17 @@
 /* Services page: "What We Do" used to be followed by "Meet Our Team"; keep a gap above the footer. */
 .pagelayer-body .p-uew7815 { padding-bottom: 100px; }
 
+/* "Our Services": its 100px top margin showed a white band between the black header and this black section. */
+.pagelayer-body .p-ley8739 { margin-top: 0; }
+
+/* Short pages (Home, Contact) end above the bottom of a tall window; show the footer's black there, not white. */
+html { background-color: #000; }
+
+/* About, Contact: the space above the first section was a margin, which now shows that black. Same space as padding,
+   inside the white section. */
+.pagelayer-body .p-k7a4453 { margin-top: 0; padding-top: 100px; }
+.pagelayer-body .p-cio8915 { margin-top: 0; padding-top: 60px; }
+
 /* Headings retagged for SEO (one h1 per page, no skipped levels) keep the look of the tag they replaced. */
 .pagelayer-body h1.rchs-was-h2 { font-size: 45px; }
 :where(.pagelayer-body) h1.rchs-was-h2 { color: #111111ff; } /* low specificity, so section colours still win as they did over h2 */
@@ -36,11 +47,11 @@
 		padding: 0;
 	}
 
-	/* "Our Services": drop the white 100px band above it and the desktop-sized padding. */
-	.pagelayer-body .p-ley8739 { margin-top: 0; padding-top: 56px; padding-bottom: 56px; }
+	/* "Our Services": drop the desktop-sized padding. */
+	.pagelayer-body .p-ley8739 { padding-top: 56px; padding-bottom: 56px; }
 	.pagelayer-body .p-uew7815 { padding-bottom: 48px; }
 
 	/* About: smaller gap above "About Me"; hide the empty spacer row before the footer. */
-	.pagelayer-body .p-k7a4453 { margin-top: 48px; }
+	.pagelayer-body .p-k7a4453 { padding-top: 48px; }
 	.pagelayer-body .p-fno5153 { display: none; }
 }
