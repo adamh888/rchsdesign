@@ -4,8 +4,24 @@
 /* Services page: "What We Do" used to be followed by "Meet Our Team"; keep a gap above the footer. */
 .pagelayer-body .p-uew7815 { padding-bottom: 100px; }
 
+/* Headings retagged for SEO (one h1 per page, no skipped levels) keep the look of the tag they replaced. */
+.pagelayer-body h1.rchs-was-h2 { font-size: 45px; }
+:where(.pagelayer-body) h1.rchs-was-h2 { color: #111111ff; } /* low specificity, so section colours still win as they did over h2 */
+.pagelayer-body h2.rchs-was-h3 { font-size: 35px; }
+.pagelayer-body p.rchs-was-h6 { font-family: Muli; font-size: 20px; font-weight: 500; }
+.pagelayer-body :is(h2, h3).pagelayer-service-heading { font-family: inherit; font-weight: inherit; margin: 0; }
+
+/* Phones: a 1080px hero instead of the 1920px original (893 KB -> 340 KB). */
+@media (max-width: 480px) {
+	.pagelayer-body .p-kkq7070 { background-image: url("/assets/hero-mobile.jpg"); }
+}
+
 /* Phones and tablets (780px is Pagelayer's breakpoint, where the menu collapses). */
 @media (max-width: 780px) {
+	.pagelayer-body h1.rchs-was-h2 { font-size: 30px; }
+	.pagelayer-body h2.rchs-was-h3 { font-size: 25px; }
+	.pagelayer-body p.rchs-was-h6 { font-size: 18px; }
+
 	/* Header logo: the About/Contact/Services header let it fill 70% of the screen. Match the home page. */
 	.pagelayer-body .pagelayer-header .pagelayer-img { max-width: 110px; }
 	.pagelayer-body .pagelayer-header .pagelayer-image-holder { text-align: left; }
