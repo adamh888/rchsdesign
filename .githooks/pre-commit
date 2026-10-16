@@ -1,0 +1,3 @@
+#!/bin/sh
+# Keep sitemap.xml in step with the pages being committed.
+node scripts/sitemap.js && git add public/sitemap.xml

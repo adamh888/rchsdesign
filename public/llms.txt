@@ -1,0 +1,15 @@
+# RCHS Design Studio
+
+> RCHS Design Studio LLC (pronounced "arches") is an architecture firm serving all of New Jersey and New York, especially Monmouth County, NJ. It offers residential design, commercial design, and office design and interior fitouts, from concept design through construction. The principal is Rachel L. Harari, an architect registered in NJ and NY.
+
+- Service area: all of New Jersey and New York, especially Monmouth County, NJ
+- Phone: 732-539-6372
+- Email: info@rchsdesign.com
+- Instagram: https://www.instagram.com/rchs.design.studio/
+
+## Pages
+
+- [Home](https://rchsdesign.com/): The studio's name, its focus on fine architecture, and why it is named after the arch
+- [About](https://rchsdesign.com/about/): Rachel L. Harari, the architect: background, approach, and registration (NJ, NY)
+- [Services](https://rchsdesign.com/services/): Residential design, commercial design, office design and interior fitouts, and the four-step process (understand the vision, design and plan, interiors and material selection, build)
+- [Contact](https://rchsdesign.com/contact/): Phone and email to schedule a consultation
