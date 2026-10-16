@@ -22,9 +22,41 @@ html { background-color: #000; }
 .pagelayer-body p.rchs-was-h6 { font-family: Muli; font-size: 20px; font-weight: 500; }
 .pagelayer-body :is(h2, h3).pagelayer-service-heading { font-family: inherit; font-weight: inherit; margin: 0; }
 
+/* Home hero: the photo sits on a 3D plane that slowly drifts and tilts on its own (--mx, --my: -0.35..0.35) and
+   tips back and zooms in as the page scrolls (--p: 0..1). The script at the end of index.html sets the vars. */
+/* Perspective grows with the window: a fixed 900px warped the photo hard on wide screens, where the plane is huge. */
+.pagelayer-body .p-kkq7070 { --mx: 0; --my: 0; --p: 0; background-image: none; overflow: hidden; perspective: max(900px, 110vw); }
+.pagelayer-body .p-kkq7070::before {
+	content: "";
+	position: absolute;
+	inset: 0; /* same framing as the original background at rest */
+	background: url("/wp-content/uploads/2025/01/IMG_3998-scaled.jpeg") center / cover no-repeat;
+	/* Zooms in only as far as the current tilt needs to keep the edges hidden: max(|mx|, |my|). */
+	transform:
+		translate3d(calc(var(--mx) * -30px), calc(var(--my) * -20px), 0)
+		rotateX(calc(var(--my) * 6deg + var(--p) * 6deg)) rotateY(calc(var(--mx) * -8deg))
+		scale(calc(1 + max(var(--mx), -1 * var(--mx), var(--my), -1 * var(--my)) * .22 + var(--p) * .2));
+	will-change: transform;
+}
+/* The text floats a little the other way, so it reads as a layer in front of the photo. */
+.pagelayer-body .p-kkq7070 > .pagelayer-row-holder { transform: translate3d(calc(var(--mx) * 12px), calc(var(--my) * 8px), 0); }
+/* On load the photo comes into focus from dark and close, then the text rises in. Individual scale/translate
+   properties stack on top of the transforms above instead of replacing them. */
+@media (prefers-reduced-motion: no-preference) {
+	.pagelayer-body .p-kkq7070::before { animation: rchs-hero-focus 2.4s cubic-bezier(.2, .7, .2, 1) backwards; }
+	.pagelayer-body .p-kkq7070 > .pagelayer-row-holder { animation: rchs-hero-rise 1.4s .6s cubic-bezier(.2, .7, .2, 1) backwards; }
+}
+@keyframes rchs-hero-focus { from { scale: 1.35; filter: blur(12px) brightness(.3); } }
+@keyframes rchs-hero-rise { from { opacity: 0; translate: 0 28px; } }
+
+/* Big or high-density screens: the full 2933px photo, since the 1920px one gets blown up past its pixels there. */
+@media (min-width: 1500px), (min-width: 781px) and (min-resolution: 1.5dppx) {
+	.pagelayer-body .p-kkq7070::before { background-image: url("/assets/hero-large.jpg"); }
+}
+
 /* Phones: a 1080px hero instead of the 1920px original (893 KB -> 340 KB). */
 @media (max-width: 480px) {
-	.pagelayer-body .p-kkq7070 { background-image: url("/assets/hero-mobile.jpg"); }
+	.pagelayer-body .p-kkq7070::before { background-image: url("/assets/hero-mobile.jpg"); }
 }
 
 /* Phones and tablets (780px is Pagelayer's breakpoint, where the menu collapses). */
