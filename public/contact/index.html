@@ -422,24 +422,25 @@ body.rtl .p-jfm9137 .pagelayer-email-icon{margin-left:7px}
 </style><div class="pagelayer-contact-form-div pagelayer-contact-form-holder">
 					<div class="pagelayer-message-box pagelayer-message-top"></div>
 					
-					<form class="pagelayer-contact-form" id="contact-form" name="Contact Form" onsubmit="return pagelayer_contact_submit(this, event)" method="POST">
+					<form class="pagelayer-contact-form" id="contact-form" name="Contact Form" action="https://api.web3forms.com/submit" method="POST">
 						<div class="pagelayer-contact-holder">
 <div pagelayer-id="mwt2449" class="p-mwt2449 pagelayer-contact_item">
 <style pagelayer-style-id="mwt2449">.p-mwt2449{width:100%;padding-top:px; padding-right:px; padding-bottom:10px; padding-left:px}
-</style><input type="text" placeholder="Name" name="name" /></div>
+</style><input type="text" placeholder="Name" name="name" required /></div>
 <div pagelayer-id="lz17581" class="p-lz17581 pagelayer-contact_item">
 <style pagelayer-style-id="lz17581">.p-lz17581{width:100%;padding-top:px; padding-right:px; padding-bottom:10px; padding-left:px}
-</style><input type="email" placeholder="Email" name="email" /></div>
+</style><input type="email" placeholder="Email" name="email" required /></div>
 <div pagelayer-id="b1d5101" class="p-b1d5101 pagelayer-contact_item">
 <style pagelayer-style-id="b1d5101">.p-b1d5101{width:100%;padding-top:px; padding-right:px; padding-bottom:10px; padding-left:px}
 </style><input type="text" placeholder="Subject" name="Subject" /></div>
 <div pagelayer-id="uan3729" class="p-uan3729 pagelayer-contact_item">
 <style pagelayer-style-id="uan3729">.p-uan3729{width:100%;padding-top:px; padding-right:px; padding-bottom:10px; padding-left:px}
-</style><textarea name="message" rows="6" placeholder="Message"></textarea></div>
+</style><textarea name="message" rows="6" placeholder="Message" required></textarea></div>
 </div>
-						<input type="hidden" name="cfa-pagelayer-id" />
-						<input type="hidden" name="cfa-post-id" value="42" />
-						<input type="hidden" name="cfa-custom-template" value="true" />
+						<!-- Web3Forms key for info@rchsdesign.com. It is public by design; get one at https://web3forms.com -->
+						<input type="hidden" name="access_key" value="3b4a2cc0-3e80-4a0b-960d-fff7e2d1d8bf" />
+						<input type="hidden" name="subject" value="New message from rchsdesign.com" />
+						<input type="hidden" name="from_name" value="RCHS Design Studio website" />
 						
 						
 						<div class="pagelayer-contact-submit-holder">
@@ -451,6 +452,41 @@ body.rtl .p-jfm9137 .pagelayer-email-icon{margin-left:7px}
 							</button>
 						</div>
 					</form>
+					<script>
+					// Send through Web3Forms without leaving the page; the form's action still works if JS is off.
+					document.getElementById("contact-form").addEventListener("submit", function (e) {
+						e.preventDefault();
+						var form = this;
+						var box = document.querySelector(".pagelayer-message-top");
+						var btn = form.querySelector(".pagelayer-contact-submit-btn");
+						var spin = btn.querySelector(".fa-spin");
+						btn.disabled = true;
+						spin.style.display = "";
+						box.className = "pagelayer-message-box pagelayer-message-top";
+						box.textContent = "";
+						fetch(form.action, {
+							method: "POST",
+							headers: { "Content-Type": "application/json", Accept: "application/json" },
+							body: JSON.stringify(Object.fromEntries(new FormData(form)))
+						})
+							.then(function (r) { return r.json(); })
+							.then(function (json) {
+								if (!json.success) throw new Error(json.message);
+								box.classList.add("pagelayer-cf-msg-suc");
+								box.textContent = "Thank you! Your message has been sent. We'll be in touch soon.";
+								form.reset();
+							})
+							.catch(function (err) {
+								console.error(err);
+								box.classList.add("pagelayer-cf-msg-err");
+								box.textContent = "Sorry, your message could not be sent. Please email info@rchsdesign.com or call 732-539-6372.";
+							})
+							.finally(function () {
+								btn.disabled = false;
+								spin.style.display = "none";
+							});
+					});
+					</script>
 					<div class="pagelayer-message-box pagelayer-message-bottom"></div>
 			</div></div>
 </div></div>
